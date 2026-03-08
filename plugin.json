@@ -1,0 +1,23 @@
+{
+  "name": "copilot-reviewer",
+  "description": "Compares implementation against specifications and produces comprehensive HTML compliance reports with scoring, traceability matrices, and actionable findings. Part of the sdd-vscode-agents collection.",
+  "version": "1.0.0",
+  "author": {
+    "name": "SufficientDaikon"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/SufficientDaikon/copilot-reviewer",
+  "repository": "https://github.com/SufficientDaikon/copilot-reviewer",
+  "keywords": [
+    "spec-driven-development",
+    "code-review",
+    "compliance",
+    "quality-gate",
+    "spec-review",
+    "sdd"
+  ],
+  "category": "Development Workflows",
+  "tags": ["sdd-vscode-agents"],
+  "agents": "agents/",
+  "hooks": "hooks.json"
+}

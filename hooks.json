@@ -1,0 +1,20 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "./scripts/detect-spec-and-code.sh",
+        "windows": "powershell -ExecutionPolicy Bypass -File scripts\\detect-spec-and-code.ps1",
+        "timeout": 15
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "./scripts/on-review-complete.sh",
+        "windows": "powershell -ExecutionPolicy Bypass -File scripts\\on-review-complete.ps1",
+        "timeout": 10
+      }
+    ]
+  }
+}
