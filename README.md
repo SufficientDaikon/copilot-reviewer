@@ -1,119 +1,63 @@
+<div align="center">
+
+<img src="https://img.shields.io/badge/VS%20Code%20Copilot%20Agent-Compliance%20Reviewer-A177FE?style=for-the-badge&logo=github-copilot&logoColor=white" />
+
 # copilot-reviewer
 
-> **Part of [sdd-vscode-agents](https://github.com/SufficientDaikon/sdd-vscode-agents)** — install the full collection for the complete SDD pipeline + UI/UX lifecycle.
+*Reviews implementation against the original specification for compliance.*
 
-A VS Code Copilot agent plugin that compares implementation against specifications and produces comprehensive HTML compliance reports.
+[![Part of SDD Agent Suite](https://img.shields.io/badge/Part%20of-SDD%20Agent%20Suite-A177FE?style=flat-square)](https://github.com/SufficientDaikon/sdd-vscode-agents)
 
-## What it does
+</div>
 
-The **reviewer** agent takes a specification and an implementation, then systematically audits:
+---
 
-- **User story coverage** — Is each story implemented with passing tests?
-- **Functional requirements** — Is each FR-001, FR-002... correctly implemented?
-- **Non-functional requirements** — Performance, security, accessibility met?
-- **Success criteria** — Are SC-001, SC-002... verifiable?
-- **Edge cases** — Are error scenarios handled?
-- **Code quality** — Readability, patterns, test coverage?
+## What It Does
 
-Produces a self-contained **HTML report** (`review-report.html`) with:
+The **Reviewer** agent is your quality gatekeeper. It takes an implementation and compares it against the original specification, producing a detailed compliance report that identifies gaps, deviations, and quality issues.
 
-- Executive summary with compliance score
-- Requirements traceability matrix (FR → Code → Test)
-- Color-coded findings (Critical/Major/Minor)
-- Verdict: APPROVED / APPROVED WITH CONDITIONS / NEEDS REVISION / REJECTED
+It generates a comprehensive HTML/CSS report with section-by-section scoring, highlighting what was implemented correctly, what was missed, and what deviated from the spec. Each finding includes specific file references and actionable recommendations.
 
-## Hooks included
+Use the Reviewer as the final checkpoint before merging — it catches the subtle spec violations that manual code review often misses, ensuring your implementation truly matches what was specified.
 
-| Hook                          | Event          | What it does                                                                                                                                      |
-| ----------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Spec & code detection**     | `SessionStart` | Auto-detects spec files, tasks.md, test files, existing reports, project type, and git branch — injects context so the agent knows what to review |
-| **Review completion summary** | `Stop`         | When the session ends, checks if a review report was generated, extracts the verdict, and displays it with the report path                        |
+## Features
 
-## Install
+- ✅ Gap analysis between spec and implementation
+- ✅ Deviation detection with severity scoring
+- ✅ Comprehensive HTML/CSS compliance report output
+- ✅ Actionable recommendations for each finding
 
-### Via Copilot CLI
+## Installation
 
-```bash
-copilot plugin install SufficientDaikon/copilot-reviewer
-```
-
-### Via VS Code settings
-
-Clone the repo and add to your `settings.json`:
-
-```json
-"chat.plugins.paths": {
-    "/path/to/copilot-reviewer": true
-}
-```
-
-### Via local path
-
-```bash
-git clone https://github.com/SufficientDaikon/copilot-reviewer.git
-copilot plugin install ./copilot-reviewer
-```
+1. Install the [SDD VS Code Agents](https://github.com/SufficientDaikon/sdd-vscode-agents) extension
+2. Open VS Code Copilot Chat
+3. Use `@reviewer` to invoke this agent
 
 ## Usage
 
-Switch to the **reviewer** agent in VS Code chat, then:
-
 ```
-Review the implementation against the spec at ./specs/product-search.spec.md
+@reviewer Review the auth implementation against the original spec
 ```
 
-**Expected output**: A comprehensive `review-report.html` saved to your project directory with compliance scores, findings, and recommendations.
+## Part of the SDD Agent Suite
 
-### More examples
+This agent is one of 13 specialized Copilot Chat participants in the [SDD VS Code Agents](https://github.com/SufficientDaikon/sdd-vscode-agents) ecosystem.
 
-```
-Audit this codebase against the specification in ./docs/api-spec.md.
-Focus on functional requirements coverage and test completeness.
-```
-
-```
-Review the implementation for spec compliance. The spec is at
-./specs/library-api.spec.md and the code is in ./src/
-```
-
-## Scoring
-
-| Score   | Verdict                     | Meaning               |
-| ------- | --------------------------- | --------------------- |
-| 95-100% | ✅ APPROVED                 | Ship it               |
-| 80-94%  | ⚠️ APPROVED WITH CONDITIONS | Minor fixes needed    |
-| 60-79%  | 🔶 NEEDS REVISION           | Significant gaps      |
-| <60%    | ❌ REJECTED                 | Major rework required |
-
-## The full SDD pipeline
-
-This agent is designed to work in a pipeline:
-
-```
-spec-writer  →  implementer  →  reviewer
-  (specs it)      (codes it)      (you)
-```
-
-Install the full collection to get all three:
-
-```bash
-copilot plugin install SufficientDaikon/sdd-vscode-agents
-```
-
-## File structure
-
-```
-copilot-reviewer/
-├── plugin.json                              # Plugin manifest
-├── hooks.json                               # Hook configuration
-├── agents/
-│   └── reviewer.agent.md                    # Agent definition
-└── scripts/
-    ├── detect-spec-and-code.sh              # SessionStart hook (Unix)
-    ├── detect-spec-and-code.ps1             # SessionStart hook (Windows)
-    ├── on-review-complete.sh                # Stop hook (Unix)
-    └── on-review-complete.ps1               # Stop hook (Windows)
-```
+| Agent | Role |
+|---|---|
+| **spec-writer** | Specification Architect |
+| **implementer** | Implementation Engineer |
+| **reviewer** | Compliance Reviewer |
+| **packager** | Package Engineer |
+| **ui-lifecycle-master** | UI Lifecycle Orchestrator |
+| **ux-research** | UX Researcher |
+| **info-arch** | Information Architect |
+| **wireframe** | Wireframe Designer |
+| **ui-design** | Visual Designer |
+| **ux-design** | UX Designer |
+| **frontend-impl** | Frontend Engineer |
+| **design-reviewer** | Design Reviewer |
+| **ux-testing** | UX Tester |
 
 ## License
 
